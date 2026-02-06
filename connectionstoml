@@ -1,0 +1,8 @@
+[scw]
+# Scaleway ClickHouse profile
+host = ""
+port = 8443
+username = ""
+password = ""
+secure = true
+verify = true

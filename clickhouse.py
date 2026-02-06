@@ -12,5 +12,5 @@ client = clickhouse_connect.get_client(
     password=scw["password"],
     secure=scw.get("secure", True)
 )
-query_result = client.query("SELECT 1")
+query_result = client.query("SHOW DATABASES")
 print(query_result.result_set)
