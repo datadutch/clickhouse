@@ -1,18 +1,16 @@
-# Install deps
-pip install clickhouse-connect python-dotenv
+import clickhouse_connect
+import toml
 
-# Run with default profile
-python clickhouse_app.py
+# Load connection info from connections.toml
+config = toml.load("connections.toml")
+scw = config["scw"]
 
-# Run with prod profile
-python clickhouse_app.py --profile prod
-
-# Ad-hoc query
-python clickhouse_app.py --sql "SELECT version() AS ver"
-
-# With parameters (named placeholders in SQL)
-python clickhouse_app.py --sql "SELECT number FROM system.numbers LIMIT {limit}" --param limit=5
-
-# Override any key via env (highest priority)
-export CLICKHOUSE__prod__password='supersecret'
-python clickhouse_app.py --profile prod
+client = clickhouse_connect.get_client(
+    host=scw["host"],
+    port=scw["port"],
+    username=scw["username"],
+    password=scw["password"],
+    secure=scw.get("secure", True)
+)
+query_result = client.query("SELECT 1")
+print(query_result.result_set)
