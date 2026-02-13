@@ -1,10 +1,16 @@
-create your venv with 
+#create your virtual environment
 
-python3 -m venv venv
+python3 -m venv .venv
 
-activate with
+#activate the venv
 
 source .venv/bin/activate
+
+#install required packages
+
+pip install -r requirements.txt
+
+#configuration
 
 rename connectionstoml to connections.toml and update with your ClickHouse credentials
 
